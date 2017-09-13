@@ -11,7 +11,7 @@ require('dotenv').config()
 const app = express();
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 
 const comments = require('./routes/comments')
 const index = require('./routes/index')
@@ -21,7 +21,7 @@ mongoose.connection.openUri(`mongodb://${process.env.DB_USER}:${process.env.DB_P
 
 //now we should configure the API to use bodyParser and look for
 //JSON data in the request body
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '../react-ui/build')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -38,9 +38,11 @@ app.use(function(req, res, next) {
 });
 
 
-app.use('/', index);
 app.use('/api/comments', comments);
 
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+});
 
 //starts the server and listens for requests
 app.listen(port, function() {
