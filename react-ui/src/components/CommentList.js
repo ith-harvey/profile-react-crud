@@ -1,4 +1,4 @@
-//CommentList.js
+
 import React, { Component } from 'react';
 import Comment from './Comment';
 
@@ -25,4 +25,4 @@ class CommentList extends Component {
 
 }
 
-  export default CommentList;
+export default CommentList;

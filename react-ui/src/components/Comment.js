@@ -42,72 +42,56 @@ class Comment extends Component {
       text: ''
     })
   }
+
   deleteComment(e) {
     e.preventDefault();
     let id = this.props.uniqueID;
     this.props.onCommentDelete(id);
     console.log('oops deleted');
   }
+
   handleTextChange(e) {
     this.setState({
       text: e.target.value
     });
   }
+
   handleAuthorChange(e) {
     this.setState({
       author: e.target.value
     });
   }
+
   rawMarkup() {
     let rawMarkup = marked(this.props.children.toString());
-    return {
-      __html: rawMarkup
-    };
+    return {__html: rawMarkup};
   }
   render() {
-    return ( <
-      div>
-      <h3> {
-        this.props.author
-      } < /h3> <
-      span dangerouslySetInnerHTML = {
-        this.rawMarkup()
-      }
-      /> <a href ='#'
-      onClick = {
-        this.updateComment
-      } > update </a>
-      <a href = '#'
-      onClick = {
-        this.deleteComment
-      } > delete < /a> {
-      (this.state.toBeUpdated) ?
-      ( < form onSubmit = {
-          this.handleCommentUpdate
-        } >
-        <
-        input type = 'text' placeholder = 'Update name…'
-        value = {
-          this.state.author
-        }
-        onChange = {
-          this.handleAuthorChange
-        }
-        /> <
-        input type = 'text' placeholder = 'Update your comment…'
-        value = {
-          this.state.text
-        }
-        onChange = {
-          this.handleTextChange
-        }
-        /> <
-        input type = 'submit'
-        value = 'Update' / >
-        </form>): null
-      } <
-      /div>
+    return (
+      <div>
+        <h3> {this.props.author} </h3>
+        <span dangerouslySetInnerHTML = {this.rawMarkup()} />
+        <a href ='#'onClick = { this.updateComment}>
+          update
+        </a>
+        <a href = '#' onClick = { this.deleteComment}>
+         delete
+        </a>
+       {(this.state.toBeUpdated) ? (<form onSubmit={this.handleCommentUpdate}>
+        <input type = 'text' placeholder = 'Update name…'
+        value = {this.state.author}
+        onChange = {this.handleAuthorChange}
+        />
+
+        <input type = 'text' placeholder = 'Update your comment…'
+        value = {this.state.text}
+        onChange = {this.handleTextChange}/>
+        <input type = 'submit' value = 'Update' />
+        </form>) : null}
+      </div>
     )
   }
 }
+
+
 export default Comment;
