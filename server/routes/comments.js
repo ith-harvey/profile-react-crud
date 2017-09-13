@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Comment = require('../model/comments');
+const Comment = require('../../model/comments');
 
 //retrieve all comments from the database
 router.get('/',function(req, res, next) {

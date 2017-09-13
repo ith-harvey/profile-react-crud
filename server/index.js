@@ -4,13 +4,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path')
 require('dotenv').config()
 
 //and create our instances
 const app = express();
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
-const port = process.env.API_PORT || 3001;
+const port = process.env.PORT || 3001;
 
 const comments = require('./routes/comments')
 const index = require('./routes/index')
@@ -20,6 +21,8 @@ mongoose.connection.openUri(`mongodb://${process.env.DB_USER}:${process.env.DB_P
 
 //now we should configure the API to use bodyParser and look for
 //JSON data in the request body
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //To prevent errors from Cross Origin Resource Sharing, we will set
