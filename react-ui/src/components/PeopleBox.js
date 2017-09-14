@@ -25,7 +25,11 @@ class PeopleBox extends Component {
   handlePersonSubmit(person) {
     let people = this.state.data;
     person.id = Date.now();
+
+    console.log('Data we concat', people);
+
     let newPeople = people.concat([person]);
+    console.log('Data we concat', people);
 
     this.setState({ data: newPeople });
 
