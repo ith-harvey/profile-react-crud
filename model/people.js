@@ -4,11 +4,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 //create new instance of the mongoose.schema. the schema takes an
 //object that shows the shape of your database entries.
-var CommentsSchema = new Schema({
+var PeopleSchema = new Schema({
  author: String,
  text: String
 });
 //export our module to use in server.js
-var Comment = mongoose.model('Comment', CommentsSchema);
+var Person = mongoose.model('Person', PeopleSchema);
 
-module.exports =  Comment
+module.exports =  Person

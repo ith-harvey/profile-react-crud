@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path')
+
 require('dotenv').config()
 
 //and create our instances
@@ -13,7 +14,7 @@ const app = express();
 //it up, or 3001
 const port = process.env.PORT || 5000;
 
-const comments = require('./routes/comments')
+const people = require('./routes/people')
 const index = require('./routes/index')
 
 //db config
@@ -38,7 +39,7 @@ app.use(function(req, res, next) {
 });
 
 
-app.use('/api/comments', comments);
+app.use('/api/people', people);
 
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));

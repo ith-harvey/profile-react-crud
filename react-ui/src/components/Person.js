@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import marked from  'marked';
 
-class Comment extends Component {
+class Person extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,31 +11,31 @@ class Comment extends Component {
       text: ''
     };
     //binding all our functions to this class
-    this.deleteComment = this.deleteComment.bind(this);
-    this.updateComment = this.updateComment.bind(this);
+    this.deletePerson = this.deletePerson.bind(this);
+    this.updatePerson = this.updatePerson.bind(this);
     this.handleAuthorChange = this.handleAuthorChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleCommentUpdate = this.handleCommentUpdate.bind(this);
+    this.handlePersonUpdate = this.handlePersonUpdate.bind(this);
   }
-  updateComment(e) {
+  updatePerson(e) {
     e.preventDefault();
     //brings up the update field when we click on the update link.
     this.setState({
       toBeUpdated: !this.state.toBeUpdated
     });
   }
-  handleCommentUpdate(e) {
+  handlePersonUpdate(e) {
     e.preventDefault();
     let id = this.props.uniqueID;
     //if author or text changed, set it. if not, leave null and our PUT
     //request will ignore it.
     let author = (this.state.author) ? this.state.author : null;
     let text = (this.state.text) ? this.state.text : null;
-    let comment = {
+    let person = {
       author: author,
       text: text
     };
-    this.props.onCommentUpdate(id, comment);
+    this.props.onPersonUpdate(id, person);
     this.setState({
       toBeUpdated: !this.state.toBeUpdated,
       author: '',
@@ -43,10 +43,10 @@ class Comment extends Component {
     })
   }
 
-  deleteComment(e) {
+  deletePerson(e) {
     e.preventDefault();
     let id = this.props.uniqueID;
-    this.props.onCommentDelete(id);
+    this.props.onPersonDelete(id);
     console.log('oops deleted');
   }
 
@@ -71,19 +71,19 @@ class Comment extends Component {
       <div>
         <h3> {this.props.author} </h3>
         <span dangerouslySetInnerHTML = {this.rawMarkup()} />
-        <a href ='#'onClick = { this.updateComment}>
+        <a href ='#'onClick = { this.updatePerson}>
           update
         </a>
-        <a href = '#' onClick = { this.deleteComment}>
+        <a href = '#' onClick = { this.deletePerson}>
          delete
         </a>
-       {(this.state.toBeUpdated) ? (<form onSubmit={this.handleCommentUpdate}>
+       {(this.state.toBeUpdated) ? (<form onSubmit={this.handlePersonUpdate}>
         <input type = 'text' placeholder = 'Update name…'
         value = {this.state.author}
         onChange = {this.handleAuthorChange}
         />
 
-        <input type = 'text' placeholder = 'Update your comment…'
+        <input type = 'text' placeholder = 'Update your description…'
         value = {this.state.text}
         onChange = {this.handleTextChange}/>
         <input type = 'submit' value = 'Update' />
@@ -94,4 +94,4 @@ class Comment extends Component {
 }
 
 
-export default Comment;
+export default Person;

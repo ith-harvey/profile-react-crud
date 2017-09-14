@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 
 
-class CommentForm extends Component {
+class PersonForm extends Component {
   constructor(props) {
     super(props);
 
@@ -30,7 +30,7 @@ class CommentForm extends Component {
       return
     }
 
-    this.props.onCommentSubmit({
+    this.props.onPersonSubmit({
       author: author,
       text: text
     });
@@ -44,7 +44,7 @@ class CommentForm extends Component {
         <input type = 'text' placeholder = 'Your name…'
         value = { this.state.author}
         onChange = { this.handleAuthorChange} />
-        
+
         <input type = 'text' placeholder = 'Say something…'
         value = { this.state.text }
         onChange = {this.handleTextChange}/>
@@ -53,4 +53,4 @@ class CommentForm extends Component {
     )
   }
 }
-export default CommentForm;
+export default PersonForm;
