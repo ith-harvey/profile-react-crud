@@ -18,8 +18,9 @@ router.get('/',function(req, res, next) {
 router.post('/',function(req, res, next) {
   console.log('in post');
     var newPerson = new Person({
-     author : req.body.author,
-     text : req.body.text
+      author : req.body.author,
+      text : req.body.text,
+      profile_img_url: req.body.profile_img_url
     });
     //body parser lets us use the req.body
     newPerson.save(function(err) {
@@ -43,6 +44,8 @@ router.put('/:id',function(req, res, next) {
 
     (req.body.author) ? person.author = req.body.author : null;
     (req.body.text) ? person.text = req.body.text : null;
+    (req.body.profile_img_url) ? person.profile_img_url = req.body.profile_img_url : null;
+
     //save person
     person.save(function(err) {
     if (err)

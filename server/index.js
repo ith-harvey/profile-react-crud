@@ -12,7 +12,7 @@ require('dotenv').config()
 const app = express();
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 const people = require('./routes/people')
 const index = require('./routes/index')

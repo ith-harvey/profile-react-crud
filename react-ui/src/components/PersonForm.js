@@ -11,7 +11,7 @@ class PersonForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { author: '', text: '', uploadedFileCloudinaryUrl: ''};
+    this.state = { author: '', text: '', uploadedFileCloudinaryUrl: '', profile_img_url: '' };
 
     this.handleAuthorChange = this.handleAuthorChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -64,6 +64,7 @@ class PersonForm extends Component {
     e.preventDefault();
     let author = this.state.author.trim();
     let text = this.state.text.trim();
+    let profile_img_url = this.state.uploadedFileCloudinaryUrl;
 
     if (!text || !author) {
       return
@@ -71,10 +72,11 @@ class PersonForm extends Component {
 
     this.props.onPersonSubmit({
       author: author,
-      text: text
+      text: text,
+      profile_img_url: profile_img_url
     });
 
-    this.setState({ author: '', text: '' });
+    this.setState({ author: '', text: '', profile_img_url: ''});
   }
 
   render() {
@@ -100,12 +102,12 @@ class PersonForm extends Component {
             {this.state.uploadedFileCloudinaryUrl === '' ? null :
             <div>
               <p>{this.state.uploadedFile.name}</p>
-              <img src={this.state.uploadedFileCloudinaryUrl} />
+              <img className="img-profile" src={this.state.uploadedFileCloudinaryUrl} />
             </div>}
           </div>
         </div>
 
-        <input type = 'submit' value = 'Post' />
+        <input type = 'submit' value = 'Save' />
       </form>
     )
   }

@@ -7,10 +7,11 @@ class PeopleList extends Component {
     let peopleNodes = this.props.data.map(person => {
       return (
         <Person author={ person.author }
+        profile_img_url={ person.profile_img_url }
         uniqueID={ person['_id'] }
         onPersonDelete={ this.props.onPersonDelete }
         onPersonUpdate={ this.props.onPersonUpdate }
-        key={ person['_id'] }>
+        key={ person['_id']} >
         { person.text }
         </Person>
       )

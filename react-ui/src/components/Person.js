@@ -8,7 +8,8 @@ class Person extends Component {
     this.state = {
       toBeUpdated: false,
       author: '',
-      text: ''
+      text: '',
+      profile_img_url: ''
     };
     //binding all our functions to this class
     this.deletePerson = this.deletePerson.bind(this);
@@ -69,6 +70,7 @@ class Person extends Component {
   render() {
     return (
       <div>
+        <img className="img-profile" src={this.props.profile_img_url} alt="Smiley face" />
         <h3> {this.props.author} </h3>
         <span dangerouslySetInnerHTML = {this.rawMarkup()} />
         <a href ='#'onClick = { this.updatePerson}>
@@ -86,6 +88,9 @@ class Person extends Component {
         <input type = 'text' placeholder = 'Update your description…'
         value = {this.state.text}
         onChange = {this.handleTextChange}/>
+
+        
+
         <input type = 'submit' value = 'Update' />
         </form>) : null}
       </div>

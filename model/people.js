@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 //object that shows the shape of your database entries.
 var PeopleSchema = new Schema({
  author: String,
- text: String
+ text: String,
+ profile_img_url: String
 });
 //export our module to use in server.js
 var Person = mongoose.model('Person', PeopleSchema);

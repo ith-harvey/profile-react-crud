@@ -5,7 +5,7 @@ import PeopleBox from './components/PeopleBox';
 
 ReactDOM.render(
    <PeopleBox
-   url='https://profile-crud-app.herokuapp.com/api/people'
+   url='http://localhost:5001/api/people'
    pollInterval={2000} />,
  document.getElementById('root')
 );
