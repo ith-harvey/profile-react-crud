@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import Person from './Person';
+import { Row } from 'react-materialize'
 
 class PeopleList extends Component {
   render() {
@@ -18,9 +19,9 @@ class PeopleList extends Component {
     })
 
     return (
-      <div>
-      { peopleNodes }
-      </div>
+      <Row>
+        { peopleNodes }
+      </Row>
     )
   }
 

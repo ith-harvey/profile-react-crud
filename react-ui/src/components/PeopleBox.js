@@ -4,6 +4,8 @@ import axios from 'axios';
 import PeopleList from './PeopleList';
 import PersonForm from './PersonForm';
 
+import {Container, Navbar} from 'react-materialize'
+
 
 class PeopleBox extends Component {
   constructor(props) {
@@ -63,13 +65,15 @@ class PeopleBox extends Component {
   render() {
     return (
       <div>
-        <h2> People: </h2>
-        <PeopleList
-          onPersonDelete = {this.handlePersonDelete}
-          onPersonUpdate = {this.handlePersonUpdate}
-          data = {this.state.data}/>
+        <Navbar brand=' People Profiles' right> </Navbar>
+        <Container>
+          <PeopleList
+            onPersonDelete = {this.handlePersonDelete}
+            onPersonUpdate = {this.handlePersonUpdate}
+            data = {this.state.data}/>
 
-        <PersonForm onPersonSubmit = {this.handlePersonSubmit}/>
+          <PersonForm onPersonSubmit = {this.handlePersonSubmit}/>
+        </Container>
       </div>
     )
   }
