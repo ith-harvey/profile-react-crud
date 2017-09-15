@@ -1,5 +1,41 @@
 
 
+html {
+  font-size: 16px;
+  min-width: 1288px;
+}
+.caption {
+  margin: 40px 0 60px 0;
+  font-weight: 300;
+  font-size: 1.25rem;
+}
+
+.button-update {
+  margin: 20px 0 0 0;
+}
+
 .img-profile {
   height: 80px;
+  border-radius: 50%;
+}
+
+.button-child-rightalign {
+  text-align: right;
+}
+
+.childtext-center {
+  text-align: center;
+}
+
+.brand-logo {
+  margin-left: 80px;
+}
+
+.card .card-content p {
+  margin: 0 0 15px 0;
+}
+
+.card-error {
+  background-color: #ee6e73;
+  color: white;
 }

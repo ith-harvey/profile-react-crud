@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
+import { Button } from 'react-materialize'
 
 const CLOUDINARY_UPLOAD_PRESET = 'gjhwcukc';
 const CLOUDINARY_UPLOAD_URL='https://api.cloudinary.com/v1_1/dexu2xpbl/upload';
@@ -10,10 +11,14 @@ class PersonPicture extends Component {
     super(props);
 
     this.state = {
-      uploadedFileCloudinaryUrl: ''
+      uploadedFileCloudinaryUrl: '',
+      hasImageDroped: false
     };
 
+    //binding all our functions to this class
     this.onImageDrop = this.onImageDrop.bind(this)
+    this.changeImage = this.changeImage.bind(this)
+    this.resetImageString = this.resetImageString.bind(this)
   }
     onImageDrop(files) {
       this.setState({
@@ -33,37 +38,47 @@ class PersonPicture extends Component {
         if (err) {
           console.error(err);
         }
-        console.log('url!',response.body.secure_url);
-
+        console.log('is it here?',response.body.secure_url );
         if (response.body.secure_url !== '') {
-          this.setState({
-            uploadedFileCloudinaryUrl: response.body.secure_url
-          });
-
           this.props.onImageUpload({
             profile_img_url: response.body.secure_url
           });
+
+          this.setState({ hasImageDroped: true,
+          uploadedFileCloudinaryUrl: response.body.secure_url });
         }
       });
+    }
+
+    resetImageString() {
+      this.setState({ hasImageDroped: false})
+    }
+
+
+    changeImage() {
+      this.setState({
+        uploadedFileCloudinaryUrl: '',
+        hasImageDroped: false
+      })
     }
 
   render() {
     return (
       <div>
+        {this.state.hasImageDroped ? <div>
+          <Button onClick={this.changeImage}>Change image</Button>
+        <div className="childtext-center">
+          <img className="img-profile" src={this.state.uploadedFileCloudinaryUrl} />
+          <p>{this.state.uploadedFile.name}</p>
+        </div>
+        </div> :
         <Dropzone
           multiple={false}
           accept="image/*"
           onDrop={this.onImageDrop}>
           <p>Drop an image or click to select a file to upload.</p>
         </Dropzone>
-
-        <div>
-          {this.state.uploadedFileCloudinaryUrl === '' ? null :
-          <div>
-            <p>{this.state.uploadedFile.name}</p>
-            <img className="img-profile" src={this.state.uploadedFileCloudinaryUrl} />
-          </div>}
-        </div>
+        }
       </div>
 
     )

@@ -11,7 +11,8 @@ class Person extends Component {
       toBeUpdated: false,
       author: '',
       text: '',
-      profile_img_url: ''
+      profile_img_url: '',
+      validationFailed: ''
     };
 
     //binding all our functions to this class
@@ -32,11 +33,23 @@ class Person extends Component {
   handlePersonUpdate(e) {
     e.preventDefault();
     let id = this.props.uniqueID;
+
     //if author or text changed, set it. if not, leave null and our PUT
-    //request will ignore it.
+    //request will ignore it
     let author = (this.state.author) ? this.state.author : null;
     let text = (this.state.text) ? this.state.text : null;
     let profile_img_url = (this.state.profile_img_url) ? this.state.profile_img_url : null;
+
+    // if all fields are null then we display the error
+    if (text === null
+      && author === null
+      && profile_img_url === null) {
+
+      this.setState({ validationFailed: true })
+      return
+    } else {
+      this.setState({ validationFailed: false})
+    }
 
     let person = {
       author: author,
@@ -72,7 +85,6 @@ class Person extends Component {
   }
 
   handleImageUpload({profile_img_url}) {
-    console.log('on person edit!', profile_img_url );
     this.setState({ profile_img_url: profile_img_url })
   }
 
@@ -83,23 +95,36 @@ class Person extends Component {
   render() {
     return (
         <Col s={4}>
-          <Card title={this.props.author}>
-            <img className="img-profile" src={this.props.profile_img_url} />
-            <h3>  </h3>
-            <span dangerouslySetInnerHTML = {this.rawMarkup()} />
+          <Card>
             <Row>
-              <Col s={6}>
+              <Col s={4} >
+                <img className="img-profile" src={this.props.profile_img_url} />
+                </Col>
+                <Col s={5} >
+                <h5>{this.props.author}</h5>
+                </Col>
+            </Row>
+            <span className="description-card" dangerouslySetInnerHTML = {this.rawMarkup()} />
+            <Row>
+              <Col s={5}>
                 <Button onClick = { this.updatePerson}>
                   update
                 </Button>
               </Col>
-              <Col s={6}>
+              <Col s={5} offset="s1">
                 <Button onClick = { this.deletePerson}>
                  delete
                 </Button>
               </Col>
             </Row>
            {(this.state.toBeUpdated) ? (<form onSubmit={this.handlePersonUpdate}>
+
+           {this.state.validationFailed?
+             <Card className="card-error">
+               Please ensure that at least one of the inputs are filled.
+             </Card>
+              : '' }
+
             <input type = 'text' placeholder = 'Update name…'
             value = {this.state.author}
             onChange = {this.handleAuthorChange}
@@ -110,8 +135,7 @@ class Person extends Component {
             onChange = {this.handleTextChange}/>
 
             <PersonPicture onImageUpload = {this.handleImageUpload} />
-
-            <input type = 'submit' value = 'Update' />
+              <Button className="button-update" type = 'submit'>Save</Button>
             </form>) : null}
           </Card>
         </Col>

@@ -11,7 +11,8 @@ class PeopleBox extends Component {
   constructor(props) {
     super(props);
     this.state = { data:[] };
-
+    
+    //binding all our functions to this class
     this.loadPeopleFromServer = this.loadPeopleFromServer.bind(this);
     this.handlePersonSubmit = this.handlePersonSubmit.bind(this);
     this.handlePersonDelete = this.handlePersonDelete.bind(this);
@@ -24,6 +25,7 @@ class PeopleBox extends Component {
     })
   }
 
+  // Posts new Person to DB
   handlePersonSubmit(person) {
     let people = this.state.data;
     person.id = Date.now();
@@ -46,8 +48,8 @@ class PeopleBox extends Component {
       });
   }
 
+  //updates Person in DB based off of id
   handlePersonUpdate(id, person) {
-    //sends the person id and new author/text to our api
     axios.put(`${this.props.url}/${id}`, person).catch(err => {
         console.log(err);
       })
@@ -61,8 +63,14 @@ class PeopleBox extends Component {
   render() {
     return (
       <div>
-        <Navbar brand=' People Profiles' right> </Navbar>
+        <Navbar brand=' People Profiles' offset="s1" right> </Navbar>
         <Container>
+          <div className="childtext-center">
+          <p className="caption">
+          People Profiles is a profile management tool which allows users to read, create, edit and delete profiles.
+          </p>
+          </div>
+
           <PeopleList
             onPersonDelete = {this.handlePersonDelete}
             onPersonUpdate = {this.handlePersonUpdate}
