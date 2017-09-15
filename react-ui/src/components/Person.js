@@ -57,7 +57,6 @@ class Person extends Component {
     e.preventDefault();
     let id = this.props.uniqueID;
     this.props.onPersonDelete(id);
-    console.log('oops deleted');
   }
 
   handleTextChange(e) {
@@ -85,7 +84,7 @@ class Person extends Component {
     return (
         <Col s={4}>
           <Card title={this.props.author}>
-            <img className="img-profile" src={this.props.profile_img_url} alt="Smiley face" />
+            <img className="img-profile" src={this.props.profile_img_url} />
             <h3>  </h3>
             <span dangerouslySetInnerHTML = {this.rawMarkup()} />
             <Row>

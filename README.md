@@ -7,26 +7,18 @@ Each profile consists of a Name, description and profile image.
 [Visit People Profiles at https://profile-crud-app.herokuapp.com/](https://profile-crud-app.herokuapp.com/)
 
 ### Technologies:
-* JavaScript
-* React
-* HTML
-* CSS
-* Express
-
-* react-materialize
-* mongoose
-* axios
+* JavaScript, React, HTML, CSS, Express, react-materialize, mongoose, axios
 
 
 ### Getting started:
 
 
 #### Installation
-Since the React front-end is located inside of the `react-ui` folder it can make installation a little more complicated than usual.
+Since the React front-end is located inside of the `react-ui` folder it can make installation a little more complicated.
 
 Installation steps are as follows:
-* Fork and or clone the repository
-* Once you are in the root folder run `npm install`
+* Fork and or clone the repository.
+* Once you are in the root folder run `npm install`.
 * Then change directories into the react-ui folder `cd react-ui`.
 * Once you are in the react-ui folder run `npm install` for a second and final time.
 

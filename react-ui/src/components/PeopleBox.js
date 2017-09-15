@@ -28,10 +28,7 @@ class PeopleBox extends Component {
     let people = this.state.data;
     person.id = Date.now();
 
-    console.log('Data we concat', people);
-
     let newPeople = people.concat([person]);
-    console.log('Data we concat', people);
 
     this.setState({ data: newPeople });
 
@@ -43,7 +40,6 @@ class PeopleBox extends Component {
 
   handlePersonDelete(id) {
     axios.delete(`${this.props.url}/${id}`).then(res => {
-        console.log('Person deleted');
 
       }).catch(err => {
         console.error(err);

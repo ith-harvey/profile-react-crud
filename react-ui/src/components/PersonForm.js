@@ -29,7 +29,6 @@ class PersonForm extends Component {
     e.preventDefault();
     let author = this.state.author.trim();
     let text = this.state.text.trim();
-    console.log('hopfully this is the URL!', this.state.uploadedFileCloudinaryUrl);
     let profile_img_url = this.state.profile_img_url;
 
     if (!text || !author) {
@@ -46,7 +45,6 @@ class PersonForm extends Component {
   }
 
   handleImageUpload({profile_img_url}) {
-    console.log('on PersonForm', profile_img_url );
     this.setState({ profile_img_url: profile_img_url })
   }
 

@@ -34,14 +34,11 @@ router.post('/',function(req, res, next) {
 
 //edit person in the database
 router.put('/:id',function(req, res, next) {
-
   Person.findById(req.params.id, function(err, person) {
     if (err)
       res.send(err);
-
     //setting the new author and text to whatever was changed. If
     //nothing was changed we will not alter the field.
-
     (req.body.author) ? person.author = req.body.author : null;
     (req.body.text) ? person.text = req.body.text : null;
     (req.body.profile_img_url) ? person.profile_img_url = req.body.profile_img_url : null;
